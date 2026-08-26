@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f4f5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Pulsante Demo">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<title>Pulsante Demo</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f4f4f5;color:#111827}
+main{width:min(92vw,420px);padding:28px;text-align:center;background:#fff;border:1px solid #e5e7eb;border-radius:24px;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+h1{margin:0 0 8px;font-size:28px}p{color:#6b7280;margin:0 0 24px}.counter{font-size:72px;font-weight:700;line-height:1;margin:18px 0 26px}
+button{width:100%;min-height:56px;border:0;border-radius:16px;font-size:18px;font-weight:700;background:#111827;color:#fff}.small{margin-top:18px;font-size:13px;color:#9ca3af}
+</style>
+</head>
+<body>
+<main>
+<h1>La mia web app</h1>
+<p>Premi il pulsante e guarda il contatore.</p>
+<div id="counter" class="counter" aria-live="polite">0</div>
+<button id="pressButton" type="button">SCHIACCIA QUI</button>
+<div class="small">Demo PWA • aggiungibile alla Home di iPhone</div>
+</main>
+<script>
+const c=document.getElementById('counter');const b=document.getElementById('pressButton');
+let n=Number(localStorage.getItem('buttonDemoCount')||0);c.textContent=n;
+b.addEventListener('click',()=>{n++;c.textContent=n;localStorage.setItem('buttonDemoCount',String(n));});
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script>
+</body>
+</html>
